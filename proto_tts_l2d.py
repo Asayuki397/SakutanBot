@@ -1,7 +1,13 @@
 import openai
 import json
 import requests
-from live2d import Live2DModel
+import cv2
+
+# Live2D 모델 로드
+model = Live2DModel("shizuku.model3.json")
+
+# Live2D 모델 초기화
+model.set_motion("idle_1")
 
 def initVar():
     global EL_key
@@ -72,5 +78,25 @@ def EL_TTS(message):
 initVar()
 master_input = input(prompt : )
 res = llm(master_input)
+
+# 감정 분석 수행
+blob = TextBlob(res)
+polarity = blob.sentiment.polarity
+subjectivity = blob.sentiment.subjectivity
+
+# 감정 분석 결과에 따라 Live2D 모델 제어
+if polarity > 0:
+    # 긍정적인 감정일 경우
+    model.set_expression("happy")
+    model.set_motion("motion_3")
+elif polarity < 0:
+    # 부정적인 감정일 경우
+    model.set_expression("sad")
+    model.set_motion("motion_6")
+else:
+    # 중립적인 감정일 경우
+    model.set_expression("normal")
+    model.set_motion("idle_1")
+
 EL_TTS(res)
 print(res)

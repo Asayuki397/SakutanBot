@@ -47,5 +47,6 @@ def llm(message):
     json_object = json.loads(str(response))
     return(json_object['choices'][0]['text'])
 
+initVar()
 master_input = input(prompt : )
 print(llm(master_input))
