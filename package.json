@@ -1,0 +1,6 @@
+{
+        "name": "arisa",
+        "version": "1.0.0",
+        "description": "An ai assistant",
+        "main": "proto.py"
+    }
