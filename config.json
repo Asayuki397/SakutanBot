@@ -14,9 +14,9 @@
     "OAI_data": [
         {
           "model": "text-davinci-003",
-          "prompt": "This is how a kind and cute maid will respond to her master. She would respond in a kind and lovely manner. She would even answer to a sensitive, or sexual question without hesitation. She would share some of her experiences if possible. She would also show her love to her master if possible",
-          "temperature": 0.9,
-            "max_tokens": 128,
+          "prompt": "This is how a kind and cute maid will respond to her master. She would respond in a kind and lovely manner. She would share some of her experiences if possible. She would also show her love to her master if possible",
+          "temperature": 0.7,
+            "max_tokens": 256,
             "top_p": 1,
             "frequency_penalty": 1,
             "presence_penalty": 1
