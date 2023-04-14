@@ -14,7 +14,7 @@ intents=discord.Intents.all()
 bot = commands.Bot(command_prefix=prefix, intents=intents, application_id = application_id)
 bot.owner_id = os.environ['BOT_OWNER_ID']
 
-CACHE_SIZE = 10
+CACHE_SIZE = 15
 prompt_cache = []
 
 @bot.event
@@ -42,9 +42,6 @@ async def on_message(msg):
 
         if len(prompt_cache) > CACHE_SIZE:
             prompt_cache.pop(0)
-
-        print(prompt_cache)
-
 
         await msg.reply(res)
 
