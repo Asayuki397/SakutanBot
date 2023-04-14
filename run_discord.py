@@ -22,7 +22,7 @@ async def on_ready():
 
 @bot.event
 async def on_message(msg):
-    if msg.channel.id == 1096237172429947012:
+    if msg.channel.id == 1096237172429947012 && not msg.author.bot:
         res = llm(msg.content)
         await msg.reply(res)
 
