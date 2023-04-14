@@ -24,7 +24,7 @@ async def on_ready():
 async def on_message(msg):
     if msg.channel.id == 1096237172429947012:
         res = llm(msg.content)
-        await ctx.send(res)
+        await message.reply(res)
 
 
 bot.run(f"{BOT_TOKEN}")
