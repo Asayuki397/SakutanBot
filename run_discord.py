@@ -4,6 +4,7 @@ from discord.ext import commands
 import os
 import asyncio
 import json
+from proto import llm
 
 BOT_TOKEN = os.environ['BOT_TOKEN']
 application_id = os.environ['APPLICATION_ID']
@@ -21,7 +22,9 @@ async def on_ready():
 
 @bot.event
 async def on_message(msg):
-    print(msg.channel.id)
+    if msg.channel.id == 1096237172429947012:
+        res = llm(msg.content)
+        await ctx.send(res)
 
 
 bot.run(f"{BOT_TOKEN}")
