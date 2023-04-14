@@ -31,7 +31,7 @@ def initVar():
         presence_penalty = data["OAI_data"][0]["presence_penalty"]
 
     class OAIKR:
-        key = data["keys"][1]["OAI_key"]
+        key = data["keys"][0]["OAI_key"]
         model = data["OAI_data"][1]["model"]
         prompt = data["OAI_data"][1]["prompt"]
         temperature = data["OAI_data"][1]["temperature"]
