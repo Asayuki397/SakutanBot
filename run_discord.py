@@ -14,6 +14,9 @@ intents=discord.Intents.all()
 bot = commands.Bot(command_prefix=prefix, intents=intents, application_id = application_id)
 bot.owner_id = os.environ['BOT_OWNER_ID']
 
+CACHE_SIZE = 10
+prompt_cache = []
+
 @bot.event
 async def on_ready():
     print("ARiSA logged in.")
@@ -23,11 +26,26 @@ async def on_ready():
 @bot.event
 async def on_message(msg):
 
+    
+
     if msg.author.bot:
         return
 
     if msg.channel.id == 1096237172429947012:
-        res = llm(msg.content)
+
+        global prompt_cache
+
+        res = llm(msg.content, cached = prompt_cache)
+
+        new_cache = "\nMaster: " + msg.content + "\nARiSA: " + res
+        prompt_cache.append(new_cache)
+
+        if len(prompt_cache) > CACHE_SIZE:
+            prompt_cache.pop(0)
+
+        print(prompt_cache)
+
+
         await msg.reply(res)
 
 

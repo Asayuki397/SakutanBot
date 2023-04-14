@@ -31,12 +31,17 @@ def initVar():
         key = data["keys"][0]["EL_key"]
         voice = data["EL_data"][0]["voice"]
 
-def llm(message):
+def llm(message, cached = None):
+
+    if cached is not None:
+        cache_prompt = "".join(cached) + "\nMaster: " + message + "\nARiSA:"
+    else:
+        cache_prompt = "\nMaster: " + message + "\nARiSA:"
 
     openai.api_key = OAI.key
     response = openai.Completion.create(
       model= OAI.model,
-      prompt= OAI.prompt + "\n\nMaster: " + message + "\nARiSA:",
+      prompt= OAI.prompt + cache_prompt,
       temperature = OAI.temperature,
       max_tokens = OAI.max_tokens,
       top_p = OAI.top_p,
