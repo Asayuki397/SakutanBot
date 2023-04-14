@@ -19,4 +19,9 @@ async def on_ready():
     game = discord.Game("ARiSA 채팅방")
     await bot.change_presence(status=discord.Status.online, activity=game)
 
+@bot.event
+async def on_message(msg):
+    print(msg.channel.id)
+
+
 bot.run(f"{BOT_TOKEN}")
