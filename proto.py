@@ -48,5 +48,7 @@ def llm(message):
     return(json_object['choices'][0]['text'])
 
 initVar()
-master_input = input("prompt : ")
-print(llm(master_input))
+
+if __name__ == "__main__":
+    master_input = input("prompt : ")
+    print(llm(master_input))
