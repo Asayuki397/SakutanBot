@@ -51,7 +51,7 @@ async def on_message(msg):
 
         global prompt_cache_korean
 
-        res = llm(msg.content, cached = prompt_cache_korean)
+        res = llm(msg.content, cached = prompt_cache_korean, lang = "kr")
 
         new_cache = "\n주인님: " + msg.content + "\n아리사: " +res
         prompt_cache_korean.append(new_cache)
