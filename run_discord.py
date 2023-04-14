@@ -19,5 +19,4 @@ async def on_ready():
     game = discord.Game("ARiSA 채팅방")
     await bot.change_presence(status=discord.Status.online, activity=game)
 
-asyncio.run(load_cogs())
 bot.run(f"{BOT_TOKEN}")
