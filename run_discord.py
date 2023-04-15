@@ -33,7 +33,7 @@ async def on_message(msg):
     if msg.author.bot:
         return
 
-    if msg.startswith(".."):
+    if msg.content.startswith(".."):
         return
 
     if msg.channel.id == 1096237172429947012:
