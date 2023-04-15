@@ -33,6 +33,9 @@ async def on_message(msg):
     if msg.author.bot:
         return
 
+    if msg.startswith(".."):
+        return
+
     if msg.channel.id == 1096237172429947012:
 
         global prompt_cache
