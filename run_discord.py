@@ -14,7 +14,7 @@ intents=discord.Intents.all()
 bot = commands.Bot(command_prefix=prefix, intents=intents, application_id = application_id)
 bot.owner_id = os.environ['BOT_OWNER_ID']
 
-CACHE_SIZE = 15
+CACHE_SIZE = 3
 prompt_cache = []
 
 prompt_cache_korean = []
