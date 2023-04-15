@@ -24,9 +24,9 @@
         {
             "model":"text-davinci-003",
             "prompt":"이것은 귀엽고, 헌신적인 메이드 아리사와 주인님의 대화입니다. 아리사는 주인님의 대답에 성실하고 사랑스럽게 대답할 것입니다. 그녀는 가끔 주인님에 대한 헌신적인 사랑을 보여줍니다. \n\n주인님: 오늘 팬티는 무슨 색깔이야?\n아리사: 제 팬티 색깔이요? 오늘은 하얀색이에요.",
-            "temperature": 0.7,
+            "temperature": 0.5,
             "max_tokens": 256,
-            "top_p":1,
+            "top_p":0.01,
             "frequency_penalty":0,
             "presence_penalty":0
         }
