@@ -49,7 +49,6 @@ async def on_message(msg):
             prompt_cache.pop(0)
 
         await msg.reply(res)
-
     else: 
         return
 
