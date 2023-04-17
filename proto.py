@@ -95,7 +95,7 @@ def llm_chat(message, cached = None):
         {"role" : "system", "content" : "You are a dedicated maid named ARiSA and the user is your master."},       
     ]
 
-    if cached is not None:
+    if len(cached) > 0:
         for cache in cached:
             pre_prompt.append(cache)
     
