@@ -105,6 +105,8 @@ def llm_chat(message, cached = None):
 
     openai.api_key = OAI.key
 
+    print(full_prompt)
+
 
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",  # The name of the OpenAI chatbot model to use
