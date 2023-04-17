@@ -4,7 +4,7 @@ from discord.ext import commands
 import os
 import asyncio
 import json
-from proto import llm
+from proto import llm, llm_chat
 
 BOT_TOKEN = os.environ['BOT_TOKEN']
 application_id = os.environ['APPLICATION_ID']
@@ -16,7 +16,7 @@ bot.owner_id = os.environ['BOT_OWNER_ID']
 
 CACHE_SIZE = 3
 prompt_cache = []
-
+prompt_cache_chat = []
 prompt_cache_korean = []
 
 @bot.event
@@ -28,8 +28,6 @@ async def on_ready():
 @bot.event
 async def on_message(msg):
 
-    print(msg.channel.id)
-
     
 
     if msg.author.bot:
@@ -37,6 +35,27 @@ async def on_message(msg):
 
     if msg.content.startswith(".."):
         return
+
+    if msg.channel.id == 1097414601588617216:
+
+        global prompt_cache_chat
+
+        res = llm_chat(msg.content, cached = prompt_cache_chat)
+
+        await msg.reply(res)
+
+        new_cache = [
+            {"role" : "user", "content" : str(msg.content)},
+            {"role" : "assistant", "content" : str(res)}
+        ]
+
+        for cache in new_cache:
+            prompt_cache_chat.append(cache)
+
+        while len(prompt_cache_chat) > CACHE_SIZE*2:
+            prompt_cache_chat.pop(0)
+
+
 
     if msg.channel.id == 1096237172429947012:
 
