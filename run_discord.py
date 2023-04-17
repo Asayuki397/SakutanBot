@@ -28,6 +28,8 @@ async def on_ready():
 @bot.event
 async def on_message(msg):
 
+    print(msg.channel.id)
+
     
 
     if msg.author.bot:

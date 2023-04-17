@@ -89,6 +89,35 @@ def llm(message, cached = None, lang = "en"):
     
     return(json_object['choices'][0]['text'])
 
+def llm_chat(message, cached = None):
+
+    pre_prompt = [
+        {"role" : "system", "content" : "You are a dedicated maid named ARiSA and the user is your master."},       
+    ]
+
+    if cached is not None:
+        for cache in cached:
+            pre_prompt.append(cache)
+    
+    full_prompt = pre_prompt.append(
+        {"role" : "user", "content" : str(message)}
+    )
+
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",  # The name of the OpenAI chatbot model to use
+        messages=full_prompt,   # The conversation history up to this point, as a list of dictionaries
+        max_tokens=3800,        # The maximum number of tokens (words or subwords) in the generated response
+        stop=None,              # The stopping sequence for the generated response, if any (not used here)
+        temperature=0.7,        # The "creativity" of the generated response (higher temperature = more creative)
+    )
+
+    for choice in response.choices:
+        if "text" in choice:
+            return choice.text
+
+    return response.choices[0].message.content
+    
+
 
 
 if __name__ == "__main__":
