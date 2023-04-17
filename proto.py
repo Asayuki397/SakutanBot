@@ -103,6 +103,9 @@ def llm_chat(message, cached = None):
         {"role" : "user", "content" : str(message)}
     )
 
+    openai.api_key = OAI.key
+
+
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",  # The name of the OpenAI chatbot model to use
         messages=full_prompt,   # The conversation history up to this point, as a list of dictionaries
