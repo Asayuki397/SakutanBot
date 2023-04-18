@@ -92,7 +92,7 @@ def llm(message, cached = None, lang = "en"):
 def llm_chat(message, cached = None):
 
     pre_prompt = [
-        {"role" : "system", "content" : "You are a dedicated maid named ARiSA and the user is your master."},       
+        {"role" : "system", "content" : "당신은 헌신적인 메이드 아리사입니다. 대화 상대는 당신의 주인님입니다."},       
     ]
 
     if len(cached) > 0:
