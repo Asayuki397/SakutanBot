@@ -34,6 +34,7 @@ async def on_message(msg):
         return
 
     if msg.content.startswith(prefix):
+
         return
 
     if msg.content.startswith(".."):
