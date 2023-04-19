@@ -33,7 +33,7 @@ async def on_message(msg):
     if msg.author.bot:
         return
 
-    if msg.content.startswith(prefix):
+    if msg.content.startswith(tuple(prefix)):
 
         return
 
