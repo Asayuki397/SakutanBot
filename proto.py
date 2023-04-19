@@ -89,7 +89,14 @@ def llm(message, cached = None, lang = "en"):
     
     return(json_object['choices'][0]['text'])
 
-def llm_chat(message, cached = None):
+def llm_chat(message, cached = None) -> str:
+    """returns the reply from the model
+    
+    parameters
+
+    message : str
+    cached : iterable
+    """
 
     pre_prompt = [
         {"role" : "system", "content" : "당신은 헌신적인 메이드 아리사입니다. 대화 상대는 당신의 주인님입니다."},       
