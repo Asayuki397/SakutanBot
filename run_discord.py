@@ -33,6 +33,8 @@ async def on_message(msg):
     if msg.author.bot:
         return
 
+    if msg.content.startswith(prefix)
+
     if msg.content.startswith(".."):
         return
 
@@ -72,6 +74,11 @@ async def on_message(msg):
         await msg.reply(res)
     else: 
         return
+
+@bot.command()
+async def clear(ctx):
+    prompt_cache = []
+    await ctx.send("complete")
 
 
 bot.run(f"{BOT_TOKEN}")
