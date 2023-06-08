@@ -89,7 +89,7 @@ def llm(message, cached = None, lang = "en"):
     
     return(json_object['choices'][0]['text'])
 
-def llm_chat(message, cached = None) -> str:
+def llm_chat(message : str, cached = None) -> str:
     """returns the reply from the model
     
     parameters
