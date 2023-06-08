@@ -17,7 +17,6 @@ bot.owner_id = os.environ['BOT_OWNER_ID']
 CACHE_SIZE = 3
 prompt_cache = []
 prompt_cache_chat = []
-prompt_cache_korean = []
 
 @bot.event
 async def on_ready():
@@ -28,13 +27,10 @@ async def on_ready():
 @bot.event
 async def on_message(msg):
 
-    
-
     if msg.author.bot:
         return
 
     if msg.content.startswith(tuple(prefix)):
-
         return
 
     if msg.content.startswith(".."):
@@ -42,7 +38,16 @@ async def on_message(msg):
 
     if msg.channel.id == 1097414601588617216:
 
+        user_name = msg.author.id
+
         global prompt_cache_chat
+
+        if len(prompt_cache_chat) == 0:
+            prompt_cache_chat.append(
+                    {"role" : "system", "content" : f"당신의 대화 상대 이름 : {msg.author.name}"},
+                    )
+        elif not prompt_cache_chat[0].endswith(user_name):
+            prompt_cache_chat[0] = {"role" : "system", "content" : f"당신의 대화 상대 이름 : {msg.author.name}"}
 
         res = llm_chat(msg.content, cached = prompt_cache_chat)
 
@@ -56,7 +61,7 @@ async def on_message(msg):
         for cache in new_cache:
             prompt_cache_chat.append(cache)
 
-        while len(prompt_cache_chat) > CACHE_SIZE*2:
+        while len(prompt_cache_chat) > CACHE_SIZE*2 + 1:
             prompt_cache_chat.pop(0)
 
 
@@ -79,8 +84,12 @@ async def on_message(msg):
 
 @bot.command()
 async def clear(ctx):
+    global prompt_cache
+    global prompt_cache_chat
     prompt_cache = []
-    await ctx.send("complete")
-
-
+    prompt_cache_chat = []
+    ebd = discord.Embed(title = "Execution Success", description = "execution : cache clear", color = 0x00EEDD)
+    ebd.add_field("프롬프트 캐시가 제거되었습니다.")
+    await ctx.send(embed = ebd)
+    
 bot.run(f"{BOT_TOKEN}")
