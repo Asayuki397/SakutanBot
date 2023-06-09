@@ -46,7 +46,7 @@ async def on_message(msg):
             prompt_cache_chat.append(
                     {"role" : "system", "content" : f"당신의 대화 상대 이름 : {msg.author.name}"},
                     )
-        elif not prompt_cache_chat[0].endswith(user_name):
+        elif not prompt_cache_chat[0]["content"].endswith(user_name):
             prompt_cache_chat[0] = {"role" : "system", "content" : f"당신의 대화 상대 이름 : {msg.author.name}"}
 
         res = llm_chat(msg.content, cached = prompt_cache_chat)
@@ -91,5 +91,5 @@ async def clear(ctx):
     ebd = discord.Embed(title = "Execution Success", description = "execution : cache clear", color = 0x00EEDD)
     ebd.add_field("프롬프트 캐시가 제거되었습니다.")
     await ctx.send(embed = ebd)
-    
+
 bot.run(f"{BOT_TOKEN}")
