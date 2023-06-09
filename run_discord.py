@@ -38,16 +38,16 @@ async def on_message(msg):
 
     if msg.channel.id == 1097414601588617216:
 
-        user_name = msg.author.id
+        user_name = msg.author.name
 
         global prompt_cache_chat
 
         if len(prompt_cache_chat) == 0:
             prompt_cache_chat.append(
-                    {"role" : "system", "content" : f"당신의 대화 상대 이름 : {msg.author.name}"},
+                    {"role" : "system", "content" : f"당신의 대화 상대 이름 : {user_name}"},
                     )
         elif not prompt_cache_chat[0]["content"].endswith(user_name):
-            prompt_cache_chat[0] = {"role" : "system", "content" : f"당신의 대화 상대 이름 : {msg.author.name}"}
+            prompt_cache_chat[0] = {"role" : "system", "content" : f"당신의 대화 상대 이름 : {user_name}"}
 
         res = llm_chat(msg.content, cached = prompt_cache_chat)
 
