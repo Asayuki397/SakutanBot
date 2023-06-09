@@ -27,16 +27,18 @@ async def on_ready():
 @bot.event
 async def on_message(msg):
 
+    execution = True
+
     if msg.author.bot:
         return
 
     if msg.content.startswith(tuple(prefix)):
-        return
+        execution = False
 
     if msg.content.startswith(".."):
         return
 
-    if msg.channel.id == 1097414601588617216:
+    if msg.channel.id == 1097414601588617216 and execution:
 
         user_name = msg.author.name
 
@@ -66,7 +68,7 @@ async def on_message(msg):
 
 
 
-    if msg.channel.id == 1096237172429947012:
+    if msg.channel.id == 1096237172429947012 and execution:
 
         global prompt_cache
 
