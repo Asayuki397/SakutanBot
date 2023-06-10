@@ -64,6 +64,8 @@ async def on_message(msg):
         while len(prompt_cache_chat) > CACHE_SIZE*2 + 1:
             prompt_cache_chat.pop(0)
 
+        return
+
 
 
     if msg.channel.id == 1096237172429947012 and execution:
@@ -79,9 +81,10 @@ async def on_message(msg):
             prompt_cache.pop(0)
 
         await msg.reply(res)
-    else: 
         return
-
+    
+    await bot.process_commands(msg)
+    
 @bot.command()
 async def clear(ctx):
     print("command execution : clear")
