@@ -94,7 +94,7 @@ async def clear(ctx):
     await ctx.send(embed = ebd)
 
 current_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),"cogs")
-
+print("현재 경로", current_path)
 for ext in os.listdir(current_path):
     if ext.endswith(".py"):
         bot.load_extension(f"cogs.{ext.split('.')[0]}")
