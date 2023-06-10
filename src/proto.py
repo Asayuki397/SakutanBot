@@ -1,6 +1,6 @@
 import openai
 import json
-
+import os
 
 def initVar():
 
@@ -14,7 +14,8 @@ def initVar():
     global OAIKR
 
     try:
-        with open("config.json", "r") as json_file:
+        abs_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),"config.json")
+        with open(abs_path, "r") as json_file:
             data = json.load(json_file)
     except:
         print("Unable to open JSON file.")
