@@ -20,7 +20,7 @@ class 유저관리(commands.Cog, description = "회원가입, 내정보 등 유�
         userExistance = checkUser(id, guild_id)
         if userExistance:
             print("DB에서 ", ctx.author.name, "을 찾았습니다.")
-            await ctx.send("이미 가입했어!")
+            await ctx.send("이미 가입하셨습니다.")
         else:
             print("DB에서 ", ctx.author.name, "을 찾을 수 없습니다")
             signup(ctx.author.name, id, ctx.guild.id)
@@ -94,7 +94,7 @@ class 유저관리(commands.Cog, description = "회원가입, 내정보 등 유�
             DeleteAccount(ctx.author.id)
             print("탈퇴가 완료되었습니다.")
 
-            await ctx.send("탈퇴가 완료되었어~!")
+            await ctx.send("탈퇴가 완료되었습니다.")
         else:
             raise UserNotFoundError
        
@@ -104,13 +104,13 @@ class 유저관리(commands.Cog, description = "회원가입, 내정보 등 유�
         lvl = getLvl(ctx.author.id)
         check, date = checkDaily(ctx.author.id)
         if check:
-            await ctx.send("이미 {date}에 출석체크를 했어!".format(date=date))
+            await ctx.send("이미 {date}에 출석체크를 하셨습니다".format(date=date))
         else:
             try:
                 value = lvl*1000*random.randrange(5,8)
                 updateDB("db","dailybonus",date,"id={_id}".format(_id=ctx.author.id))
                 addMoney(ctx.author.id, value)
-                await ctx.send("출석체크 완료! {_value}만큼 돈이 입금되었어! 마지막 출석일: {date}".format(_value=value,date=date))
+                await ctx.send("출석체크가 완료되었습니다. {_value}만큼 돈이 입금되었습니다. 마지막 출석일: {date}".format(_value=value,date=date))
             except Exception as e:
                 await ctx.send(e)
             
