@@ -1,1 +1,1 @@
-worker: python run_discord.py
+worker: cd src && python run_discord.py

@@ -93,4 +93,13 @@ async def clear(ctx):
     ebd.add_field(name = "실행 완료", value = "프롬프트 캐시가 제거되었습니다.", inline = False)
     await ctx.send(embed = ebd)
 
+current_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),"cogs")
+
+async def load_cogs():
+    for ext in os.listdir(current_path):
+        if ext.endswith(".py"):
+            await bot.load_extension(f"cogs.{ext.split('.')[0]}")
+            print(f"확장 -- {ext} 로드 완료")
+
+asyncio.run(load_cogs())
 bot.run(f"{BOT_TOKEN}")
