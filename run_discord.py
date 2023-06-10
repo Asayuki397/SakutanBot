@@ -96,8 +96,4 @@ async def clear(ctx):
     await ctx.send(embed = ebd)
     print("command execution complete")
 
-@bot.event()
-async def on_error(ctx, error):
-    ctx.send(error)
-
 bot.run(f"{BOT_TOKEN}")
