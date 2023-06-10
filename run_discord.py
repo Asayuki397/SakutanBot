@@ -9,6 +9,7 @@ from proto import llm, llm_chat
 BOT_TOKEN = os.environ['BOT_TOKEN']
 application_id = os.environ['APPLICATION_ID']
 prefix = [prefix for prefix in os.environ['BOT_PREFIX'].split('-')]
+print("명령어 접두사 : ", prefix)
 intents=discord.Intents.all()
 
 bot = commands.Bot(command_prefix=prefix, intents=intents, application_id = application_id)
