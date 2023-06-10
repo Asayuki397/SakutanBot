@@ -12,18 +12,13 @@ prefix = [prefix for prefix in os.environ['BOT_PREFIX'].split('-')]
 print("명령어 접두사 : ", prefix)
 intents=discord.Intents.all()
 
-bot = commands.Bot(command_prefix=prefix, intents=intents, application_id = application_id)
+bot = commands.Bot(command_prefix=prefix, intents=intents, application_id = application_id,
+                   activity = discord.Status.online, activity = discord.Game("ARiSA 채팅방"))
 bot.owner_id = os.environ['BOT_OWNER_ID']
 
 CACHE_SIZE = 3
 prompt_cache = []
 prompt_cache_chat = []
-
-@bot.event
-async def on_ready():
-    print("ARiSA logged in.")
-    game = discord.Game("ARiSA 채팅방")
-    await bot.change_presence(status=discord.Status.online, activity=game)
 
 @bot.event
 async def on_message(msg):
