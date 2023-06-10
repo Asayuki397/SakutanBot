@@ -86,6 +86,7 @@ async def on_message(msg):
 
 @bot.command()
 async def clear(ctx):
+    print("command execution : clear")
     global prompt_cache
     global prompt_cache_chat
     prompt_cache = []
@@ -93,5 +94,10 @@ async def clear(ctx):
     ebd = discord.Embed(title = "Execution Success", description = "execution : cache clear", color = 0x00EEDD)
     ebd.add_field("프롬프트 캐시가 제거되었습니다.")
     await ctx.send(embed = ebd)
+    print("command execution complete")
+
+@bot.event()
+async def on_error(ctx, error):
+    ctx.send(error)
 
 bot.run(f"{BOT_TOKEN}")
