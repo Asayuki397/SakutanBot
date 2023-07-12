@@ -37,6 +37,7 @@ class 유저관리(commands.Cog, description = "회원가입, 내정보 등 유�
         if not userExistance:
             raise UserNotFoundError
         else:
+            
             level = getLvl(id)
             exp = getExp(id)
             money = getMoney(id)
