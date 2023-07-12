@@ -173,7 +173,7 @@ class rps:
 
         resEmbed = discord.Embed(title = "게임 결과", description = None, color = 0x00DDEE)
         resEmbed.add_field(name = "나", value = player + self.rpsIcon[self.rpsList.index(player)])
-        resEmbed.add_field(name = "아쿠땅", value = dealer + self.rpsIcon[self.rpsList.index(dealer)])
+        resEmbed.add_field(name = "아리사", value = dealer + self.rpsIcon[self.rpsList.index(dealer)])
 
         if res == "draw":
             resEmbed.add_field(name = "결과", value = "무승부")
@@ -447,7 +447,7 @@ class 도박(commands.Cog, description = "과도한 도박은 정신건강에 �
         view.add_item(paper)
         buttons = await ctx.send(view=view)
 """
-    @commands.hybrid_command(name = "퀴즈 ", description = "아쿠땅이 퀴즈를 냅니다.")
+    @commands.hybrid_command(name = "퀴즈 ", description = "아리사가 퀴즈를 냅니다.")
     @app_commands.describe(betting = "베팅할 금액을 입력하세요")
     async def 퀴즈(self, ctx, betting : int):
         quiz = quiz(ctx = ctx, betting = betting)

@@ -141,12 +141,12 @@ class 주식(commands.Cog, description = "한국 증시와 연동된 투자 시�
         await ctx.send(embed=embed)
   
     @commands.hybrid_command(name = "매수", description = "주식을 매수할 수 있습니다.")
-    @app_commands.describe(callsign = "주식의 콜사인을 입력하세요. `아틔시 주식`으로 콜사인을 확인할 수 있습니다.")
+    @app_commands.describe(callsign = "주식의 콜사인을 입력하세요. `ars 주식`으로 콜사인을 확인할 수 있습니다.")
     @app_commands.describe(amount = "매수할 수량을 입력하세요.")
     async def 매수(self, ctx, callsign : str, amount : int):
         await ctx.defer()
         if amount <= 0:
-            await ctx.send("수량은 자연수로 부탁할게")
+            await ctx.send("수량은 자연수로 부탁드립니다.")
             return
         id = ctx.author.id
         stockValue, var = getStock(callsign)
@@ -154,7 +154,7 @@ class 주식(commands.Cog, description = "한국 증시와 연동된 투자 시�
         curamount = searchDB("stocks",f"{callsign}",f"id={id}") #returns current amount
         price = stockValue * amount
         if getMoney(id) < price:
-            await ctx.send("소지금을 초과하는 주문은 할 수 없어")
+            await ctx.send("소지금을 초과하는 주문은 할 수 없습니다.")
             return
         else:
             addStock(id, callsign, amount)
@@ -169,12 +169,12 @@ class 주식(commands.Cog, description = "한국 증시와 연동된 투자 시�
             await ctx.send(embed = embed)
 
     @commands.hybrid_command(name = "매도", description = "주식을 매도할 수 있습니다.")
-    @app_commands.describe(callsign = "주식의 콜사인을 입력하세요. `아틔시 주식`으로 콜사인을 확인할 수 있습니다.")
+    @app_commands.describe(callsign = "주식의 콜사인을 입력하세요. `ars 주식`으로 콜사인을 확인할 수 있습니다.")
     @app_commands.describe(amount = "매도할 수량을 입력하세요.")
     async def 매도(self, ctx, callsign : str, amount : int):
         await ctx.defer()
         if amount <= 0:
-            await ctx.send("수량은 자연수로 부탁할게")
+            await ctx.send("수량은 자연수로 부탁드립니다.")
             return
         id = ctx.author.id
         stockValue, var = getStock(callsign)
@@ -182,7 +182,7 @@ class 주식(commands.Cog, description = "한국 증시와 연동된 투자 시�
         curamount = getAmount(id,callsign) #returns current amount
         price = stockValue * amount
         if curamount < amount:
-            await ctx.send("소지개수를 초과하는 주문은 할 수 없어")
+            await ctx.send("소지개수를 초과하는 주문은 할 수 없습니다.")
             return
         else:
             earning = price - (curavg * amount)
@@ -202,7 +202,7 @@ class 주식(commands.Cog, description = "한국 증시와 연동된 투자 시�
             await ctx.send(embed= embed)
 
     @commands.hybrid_command(name="옵션", description="옵션 거래를 할 수 있습니다.")
-    @app_commands.describe(callsign="주식의 콜사인을 입력하세요. `아틔시 주식`으로 콜사인을 확인할 수 있습니다.")
+    @app_commands.describe(callsign="주식의 콜사인을 입력하세요. `ars 주식`으로 콜사인을 확인할 수 있습니다.")
     @app_commands.describe(leverage="주식의 레버리지를 입력하세요. 높은 숫자를 입력할수록 투자위험도와 수익이 증가합니다.")
     async def 옵션(self, ctx, callsign: str, leverage: int):
         await ctx.defer()
@@ -220,12 +220,12 @@ class 주식(commands.Cog, description = "한국 증시와 연동된 투자 시�
 
         async def long_callback(interaction):
             op.pos = "long"
-            await interaction.response.edit_message(content="롱포지션 진입!")
+            await interaction.response.edit_message(content="롱포지션에 진입했습니다.")
             await buttons.delete()
 
         async def short_callback(interaction):
             op.pos = "short"
-            await interaction.response.edit_message(content="숏포지션 진입!")
+            await interaction.response.edit_message(content="숏포지션에 진입했습니다.")
             await buttons.delete()
 
         long_button.callback = long_callback
