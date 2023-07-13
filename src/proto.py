@@ -126,10 +126,20 @@ def llm_chat(message : str, cached = None) -> str:
             return choice.text
 
     return response.choices[0].message.content
+
+def arisa_reaction(activity : str):
+    
+    prompt = [
+        {"role" : "system", "content" : "당신은 헌신적인 메이드 아리사입니다. 당신은 주인님과의 게임에서 딜러이기도 합니다. 대화 상대는 당신의 주인님입니다. 다음 대화 상황에서 적절한 반응 또는 답변을 하십시오."},
+        {"role" : "user", "content" : "나는 주사위에서 승리했어"},
+        {"role" : "assistant", "content" : "(웃으며) 축하드립니다. 주인님!"},
+        {"role" : "user", "content" : f"나는 {activity}을 했어"}
+    ]
+
+    return str(llm_chat(prompt))
+
     
 
-
-
-if __name__ == "__main__":
+if __name__ == "__main__": #직접 실행시 적용 (테스트용)
     master_input = input("prompt : ")
     print(llm(master_input))

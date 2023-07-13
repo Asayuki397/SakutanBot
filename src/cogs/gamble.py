@@ -3,6 +3,7 @@ from discord.ext import commands
 from discord.ui import Button, View
 from discord import app_commands
 from users import *
+from proto import arisa_reaction
 import psycopg2
 import random
 from .errorhandler import UserNotFoundError
@@ -283,6 +284,7 @@ class 도박(commands.Cog, description = "과도한 도박은 정신건강에 �
                         resembed.add_field(name = "획득 금액", value = amount)
                         resembed.add_field(name = "손익", value = f"{amount-betting:+d}")
                         resembed.add_field(name = "획득 경험치", value = amount // 100)
+                        activity = "블랙잭에서 서로 블랙잭을 해서 무승부"
                     elif result == "playerBJ":
                         amount = int(betting*2.5)
                         resembed.add_field(name = "결과", value = "승리(블랙잭)")
@@ -291,6 +293,7 @@ class 도박(commands.Cog, description = "과도한 도박은 정신건강에 �
                         resembed.add_field(name = "획득 금액", value = amount)
                         resembed.add_field(name = "손익", value = f"{amount-betting:+d}")
                         resembed.add_field(name = "획득 경험치", value = amount // 100)
+                        activity = "블랙잭에서 블랙잭으로 승리"
                     elif result == "dealerBJ":
                         amount = 0
                         resembed.add_field(name = "결과", value = "패배(딜러 블랙잭)")
@@ -299,10 +302,12 @@ class 도박(commands.Cog, description = "과도한 도박은 정신건강에 �
                         resembed.add_field(name = "획득 금액", value = amount)
                         resembed.add_field(name = "손익", value = f"{amount-betting:+d}")
                         resembed.add_field(name = "획득 경험치", value = amount // 100)
+                        activity = "블랙잭에서 딜러 블랙잭으로 패배"
                         addLoss(ctx.author.id, betting-amount)
                     addMoney(ctx.author.id, amount)
                     modifyExp(ctx.author.id, amount //100)
                     await ctx.send(embed=resembed)
+                    await ctx.send(arisa_reaction(activity))
                     return
 
                 hitbutton = Button(label="HIT", style=discord.ButtonStyle.danger,custom_id="hit")
@@ -326,6 +331,8 @@ class 도박(commands.Cog, description = "과도한 도박은 정신건강에 �
                         await ctx.send(embed=resembed)
                         await msg.delete()
                         await buttons.delete()
+                        activity = "블랙잭에서 플레이어 버스트로 패배"
+                        await ctx.send(arisa_reaction(activity))
                         return
                 async def stand_callback(interaction, player = player,dealer = dealer):
                     result = bj.showdown(player,dealer)
@@ -339,6 +346,7 @@ class 도박(commands.Cog, description = "과도한 도박은 정신건강에 �
                         resembed.add_field(name = "획득 금액", value = amount)
                         resembed.add_field(name = "손익", value = f"{amount-betting:+d}")
                         resembed.add_field(name = "획득 경험치", value = amount // 100)
+                        activity = "블랙잭에서 딜러 버스트로 승리"
                     elif result == "playerW":
                         amount = betting*2
                         resembed.add_field(name = "결과", value = "승리")
@@ -347,6 +355,7 @@ class 도박(commands.Cog, description = "과도한 도박은 정신건강에 �
                         resembed.add_field(name = "획득 금액", value = amount)
                         resembed.add_field(name = "손익", value = f"{amount-betting:+d}")
                         resembed.add_field(name = "획득 경험치", value = amount // 100)
+                        activity = "블랙잭에서 숫자가 커서 승리"
                     elif result == "dealerW":
                         amount = 0
                         resembed.add_field(name = "결과", value = "패배")
@@ -356,6 +365,7 @@ class 도박(commands.Cog, description = "과도한 도박은 정신건강에 �
                         resembed.add_field(name = "손익", value = f"{amount-betting:+d}")
                         resembed.add_field(name = "획득 경험치", value = amount // 100)
                         addLoss(ctx.author.id, betting-amount)
+                        activity = "블랙잭에서 숫자가 작아 패배"
                     else:
                         amount = betting
                         resembed.add_field(name = "결과", value = "무승부")
@@ -364,12 +374,14 @@ class 도박(commands.Cog, description = "과도한 도박은 정신건강에 �
                         resembed.add_field(name = "획득 금액", value = amount)
                         resembed.add_field(name = "손익", value = f"{amount-betting:+d}")
                         resembed.add_field(name = "획득 경험치", value = amount // 100)
+                        activity = "블랙잭에서 숫자가 같아 무승부"
                     addMoney(ctx.author.id, amount)
                     modifyExp(ctx.author.id, amount //100)
                     player = None
                     dealer = None
                     await buttons.delete()
                     await ctx.send(embed=resembed)
+                    await ctx.send(arisa_reaction(activity))
                 hitbutton.callback = hit_callback
                 standbutton.callback = stand_callback
                 view = View()
