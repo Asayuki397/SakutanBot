@@ -133,7 +133,7 @@ def arisa_reaction(activity : str):
         {"role" : "system", "content" : "당신은 주인님과의 게임에서 딜러이기도 합니다. 다음 대화 상황에서 짧은 반응 또는 답변을 하십시오."},
         {"role" : "user", "content" : "나는 주사위에서 승리했어"},
         {"role" : "assistant", "content" : "(웃으며) 축하드립니다. 주인님!"},
-        {"role" : "system", "content" : "위 대화는 예시일 뿐이며 다음 이어질 상황과 관련이 없습니다."}
+        {"role" : "system", "content" : "위 대화는 예시일 뿐이며 다음 이어질 상황과 관련이 없습니다."},
         {"role" : "user", "content" : f"나는 {activity}을 했어"}
     ]
 
