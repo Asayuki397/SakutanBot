@@ -103,7 +103,7 @@ def llm_chat(message : str, cached = None) -> str:
         {"role" : "system", "content" : "당신은 헌신적인 메이드 아리사입니다. 대화 상대는 당신의 주인님입니다."},       
     ]
 
-    if len(cached) > 0:
+    if cached is not None:
         for cache in cached:
             pre_prompt.append(cache)
     
