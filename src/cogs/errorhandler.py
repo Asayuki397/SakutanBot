@@ -18,6 +18,9 @@ class NoMarginError(Exception):
 class MarketNotOpenError(Exception):
     pass
 
+class NotEnoughMoneyError(Exception):
+    pass
+
 class 에러관리(commands.Cog, description = "에러 핸들링 커맨드"):
 
     def __init__(self, bot):
@@ -52,35 +55,38 @@ class 에러관리(commands.Cog, description = "에러 핸들링 커맨드"):
 
         # Anything in ignored will return and prevent anything happening.
         if isinstance(error, ignored):
-            await raiseError(ctx, "명령어 존재하지 않음","존재하지 않는 명령어야 ㅠㅠ `아틔시` `help`으로 모든 명령어를 볼 수 있어~!")
+            await raiseError(ctx, "명령어 존재하지 않음",f"존재하지 않는 명령어입니다. `{ctx.command_prefix}` `help`으로 모든 명령어를 볼 수 있습니다.")
             return
 
         if isinstance(error, commands.MissingRequiredArgument):
-            await raiseError(ctx, "필수 매개변수 없음",f"필요한 매개변수가 없어ㅠㅠ `아틔시` `help` `{ctx.command}` 을(를) 확인해봐")
+            await raiseError(ctx, "필수 매개변수 없음",f"필요한 매개변수가 없습니다. `{ctx.command_prefix}` `help` `{ctx.command}` 을(를) 확인해 보십시오.")
             return
 
         if isinstance(error, commands.DisabledCommand):
-            await raiseError(ctx, "비활성화된 커맨드",f'`{ctx.command}`은(는) 비활성화된 커맨드야')
+            await raiseError(ctx, "비활성화된 커맨드",f'`{ctx.command}`은(는) 비활성화된 커맨드입니다.')
             return
 
         if isinstance(error, UserNotFoundError):
-            await raiseError(ctx, "유저 존재하지 않음","`아틔시 회원가입`으로 회원가입을 먼저 해줘")
+            await raiseError(ctx, "유저 존재하지 않음",f"`{ctx.command_prefix}` `회원가입`을 먼저 진행하십시오")
 
         if isinstance(error, NoMarginError):
-            await raiseError(ctx, "증거금 부족", "증거금이 모자라ㅠㅠ 주식의 현 가격 x 레버리지의 10%가 증거금으로 필요해")
+            await raiseError(ctx, "증거금 부족", "증거금이 부족합니다. 주식의 현 가격 x 레버리지의 10%가 증거금으로 필요합니다.")
 
         elif isinstance(error, commands.NoPrivateMessage):
             try:
-                await raiseError(ctx,"DM 사용 불가",f'`{ctx.command}`은(는) DM에서 쓸 수 없어')
+                await raiseError(ctx,"DM 사용 불가",f'`{ctx.command}`은(는) DM에서 사용할 수 없습니다.')
             except discord.HTTPException:
                 pass
 
         # For this error example we check to see where it came from...
         elif isinstance(error, commands.BadArgument):
-            await raiseError(ctx,"매개변수 오류" ,f"유효하지 않은 매개변수야~! `아틔시` `help` `{ctx.command}`로 확인해봐")
+            await raiseError(ctx,"매개변수 오류" ,f"유효하지 않은 매개변수입니다. `{ctx.command_prefix}` `help` `{ctx.command}`로 확인하십시오")
 
         elif isinstance(error, ValueError):
-            await raiseError(ctx, "유효하지 않은 입력값", f"유효하지 않은 입력값이야ㅠㅠ `아틔시` `help` `{ctx.command}`을(를) 확인해봐")
+            await raiseError(ctx, "유효하지 않은 입력값", f"유효하지 않은 입력값입니다. `{ctx.command_prefix}` `help` `{ctx.command}`을(를) 확인하십시오.")
+
+        elif isinstance(error, NotEnoughMoneyError):
+            await raiseError(ctx,"잔액 부족", f"잔액이 부족합니다. `{ctx.command_prefix}` `내정보`로 잔액을 확인할 수 있습니다.")
 
         else:
             # All other Errors not returned come here. And we can just print the default TraceBack.
