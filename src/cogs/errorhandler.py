@@ -55,11 +55,11 @@ class 에러관리(commands.Cog, description = "에러 핸들링 커맨드"):
 
         # Anything in ignored will return and prevent anything happening.
         if isinstance(error, ignored):
-            await raiseError(ctx, "명령어 존재하지 않음",f"존재하지 않는 명령어입니다. `{ctx.command_prefix}` `help`으로 모든 명령어를 볼 수 있습니다.")
+            await raiseError(ctx, "명령어 존재하지 않음",f"존재하지 않는 명령어입니다. `{ctx.prefix}` `help`으로 모든 명령어를 볼 수 있습니다.")
             return
 
         if isinstance(error, commands.MissingRequiredArgument):
-            await raiseError(ctx, "필수 매개변수 없음",f"필요한 매개변수가 없습니다. `{ctx.command_prefix}` `help` `{ctx.command}` 을(를) 확인해 보십시오.")
+            await raiseError(ctx, "필수 매개변수 없음",f"필요한 매개변수가 없습니다. `{ctx.prefix}` `help` `{ctx.command}` 을(를) 확인해 보십시오.")
             return
 
         if isinstance(error, commands.DisabledCommand):
@@ -67,7 +67,7 @@ class 에러관리(commands.Cog, description = "에러 핸들링 커맨드"):
             return
 
         if isinstance(error, UserNotFoundError):
-            await raiseError(ctx, "유저 존재하지 않음",f"`{ctx.command_prefix}` `회원가입`을 먼저 진행하십시오")
+            await raiseError(ctx, "유저 존재하지 않음",f"`{ctx.prefix}` `회원가입`을 먼저 진행하십시오")
 
         if isinstance(error, NoMarginError):
             await raiseError(ctx, "증거금 부족", "증거금이 부족합니다. 주식의 현 가격 x 레버리지의 10%가 증거금으로 필요합니다.")
@@ -80,13 +80,13 @@ class 에러관리(commands.Cog, description = "에러 핸들링 커맨드"):
 
         # For this error example we check to see where it came from...
         elif isinstance(error, commands.BadArgument):
-            await raiseError(ctx,"매개변수 오류" ,f"유효하지 않은 매개변수입니다. `{ctx.command_prefix}` `help` `{ctx.command}`로 확인하십시오")
+            await raiseError(ctx,"매개변수 오류" ,f"유효하지 않은 매개변수입니다. `{ctx.prefix}` `help` `{ctx.command}`로 확인하십시오")
 
         elif isinstance(error, ValueError):
-            await raiseError(ctx, "유효하지 않은 입력값", f"유효하지 않은 입력값입니다. `{ctx.command_prefix}` `help` `{ctx.command}`을(를) 확인하십시오.")
+            await raiseError(ctx, "유효하지 않은 입력값", f"유효하지 않은 입력값입니다. `{ctx.prefix}` `help` `{ctx.command}`을(를) 확인하십시오.")
 
         elif isinstance(error, NotEnoughMoneyError):
-            await raiseError(ctx,"잔액 부족", f"잔액이 부족합니다. `{ctx.command_prefix}` `내정보`로 잔액을 확인할 수 있습니다.")
+            await raiseError(ctx,"잔액 부족", f"잔액이 부족합니다. `{ctx.prefix}` `내정보`로 잔액을 확인할 수 있습니다.")
 
         else:
             # All other Errors not returned come here. And we can just print the default TraceBack.
