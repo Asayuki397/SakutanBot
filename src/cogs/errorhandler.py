@@ -47,6 +47,9 @@ class 에러관리(commands.Cog, description = "에러 핸들링 커맨드"):
 
         print("getattr 전", error)
 
+        if error.startswith("Hybrid"):
+            error = getattr(error, 'original', error)
+
         error = getattr(error, 'original', error)
         print("getattr 후 :", error)
 
