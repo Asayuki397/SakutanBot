@@ -141,7 +141,7 @@ class 주식(commands.Cog, description = "한국 증시와 연동된 투자 시�
         await ctx.send(embed=embed)
   
     @commands.hybrid_command(name = "매수", description = "주식을 매수할 수 있습니다.")
-    @app_commands.describe(callsign = "주식의 콜사인을 입력하세요. `ars 주식`으로 콜사인을 확인할 수 있습니다.")
+    @app_commands.describe(callsign = "주식의 콜사인을 입력하세요. `주식`으로 콜사인을 확인할 수 있습니다.")
     @app_commands.describe(amount = "매수할 수량을 입력하세요.")
     async def 매수(self, ctx, callsign : str, amount : int):
         await ctx.defer()
@@ -169,7 +169,7 @@ class 주식(commands.Cog, description = "한국 증시와 연동된 투자 시�
             await ctx.send(embed = embed)
 
     @commands.hybrid_command(name = "매도", description = "주식을 매도할 수 있습니다.")
-    @app_commands.describe(callsign = "주식의 콜사인을 입력하세요. `ars 주식`으로 콜사인을 확인할 수 있습니다.")
+    @app_commands.describe(callsign = "주식의 콜사인을 입력하세요. `주식`으로 콜사인을 확인할 수 있습니다.")
     @app_commands.describe(amount = "매도할 수량을 입력하세요.")
     async def 매도(self, ctx, callsign : str, amount : int):
         await ctx.defer()
@@ -202,7 +202,7 @@ class 주식(commands.Cog, description = "한국 증시와 연동된 투자 시�
             await ctx.send(embed= embed)
 
     @commands.hybrid_command(name="옵션", description="옵션 거래를 할 수 있습니다.")
-    @app_commands.describe(callsign="주식의 콜사인을 입력하세요. `ars 주식`으로 콜사인을 확인할 수 있습니다.")
+    @app_commands.describe(callsign="주식의 콜사인을 입력하세요. `주식`으로 콜사인을 확인할 수 있습니다.")
     @app_commands.describe(leverage="주식의 레버리지를 입력하세요. 높은 숫자를 입력할수록 투자위험도와 수익이 증가합니다.")
     async def 옵션(self, ctx, callsign: str, leverage: int):
         await ctx.defer()

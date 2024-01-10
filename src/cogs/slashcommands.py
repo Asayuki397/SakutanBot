@@ -13,7 +13,7 @@ class 슬래시커맨드(commands.Cog, description = "슬래시 커맨드와 관
         await ctx.defer()
         ctx.bot.tree.copy_global_to(guild=ctx.guild)
         synced = await ctx.bot.tree.sync(guild = ctx.guild)
-        await ctx.send(f'{len(synced)}개의 커맨드를 동기화했어!')
+        await ctx.send(f'{len(synced)}개의 커맨드를 동기화했습니다.')
         if searchDB("guilds","id",f"id={ctx.guild.id}") == None:
             insertDB("guilds", "name, id",(ctx.guild.name, ctx.guild.id))
             print(f"신규 서버 {ctx.guild.name}가 등록되었습니다.")
