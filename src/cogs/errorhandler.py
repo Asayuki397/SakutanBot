@@ -39,11 +39,9 @@ class 에러관리(commands.Cog, description = "에러 핸들링 커맨드"):
             The Exception raised.
         """
 
-        # This prevents any commands with local handlers being handled here in on_command_error.
         if hasattr(ctx.command, 'on_error'):
             return
 
-        # This prevents any cogs with an overwritten cog_command_error being handled here.
         cog = ctx.cog
         if cog:
             if cog._get_overridden_method(cog.cog_command_error) is not None:
@@ -51,11 +49,8 @@ class 에러관리(commands.Cog, description = "에러 핸들링 커맨드"):
 
         ignored = (commands.CommandNotFound, )
 
-        # Allows us to check for original exceptions raised and sent to CommandInvokeError.
-        # If nothing is found. We keep the exception passed to on_command_error.
         error = getattr(error, 'original', error)
 
-        # Anything in ignored will return and prevent anything happening.
         if isinstance(error, ignored):
             await raiseError(ctx, "명령어 존재하지 않음",f"존재하지 않는 명령어입니다. `{ctx.prefix}` `help`으로 모든 명령어를 볼 수 있습니다.")
             return
@@ -97,10 +92,8 @@ class 에러관리(commands.Cog, description = "에러 핸들링 커맨드"):
             return
 
         else:
-            # All other Errors not returned come here. And we can just print the default TraceBack.
-            print('Ignoring exception in command {}:'.format(ctx.command), file=sys.stderr)
-            traceback.print_exception(type(error), error, error.__traceback__, file=sys.stderr)
-            return
+            print(error)
+ 
 
     """Below is an example of a Local Error Handler for our command do_repeat"""
 
