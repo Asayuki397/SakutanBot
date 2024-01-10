@@ -63,7 +63,7 @@ class Option():
 
         addMoney(self.id, self.open_value + self.result)
 
-        res_embed = discord.Embed(title="포지션 종료", description=None, color=0xDDA0DD)
+        res_embed = discord.Embed(title="포지션 종료", description=None, color=0x00DDEE)
         res_embed.add_field(name="레버리지", value=f"{self.leverage}x")
         res_embed.add_field(name="수익", value=f"{self.result:+d}")
         res_embed.add_field(name="획득 경험치", value =f"{self.exp}")
@@ -130,7 +130,7 @@ class 주식(commands.Cog, description = "한국 증시와 연동된 투자 시�
     async def 주식(self,ctx):
         await ctx.defer()
         today = stockdate()
-        embed = discord.Embed(title = "주식", description=today[:4]+"-"+today[4:6]+"-"+today[6:8] + " 기준", color = 0xDDA0DD)
+        embed = discord.Embed(title = "주식", description=today[:4]+"-"+today[4:6]+"-"+today[6:8] + " 기준", color = 0x00DDEE)
         for item in mystocks:
             callsign = item.split("-")[0]
             curVal, variance = getStock(callsign, today)
@@ -162,7 +162,7 @@ class 주식(commands.Cog, description = "한국 증시와 연동된 투자 시�
             currentValue = curamount * curavg
             newavg = (currentValue + price) / (curamount + amount)
             updateStock(id, f"{callsign}avg",newavg)
-            embed = discord.Embed(title = "체결 성공", description = None, color=0xDDA0DD)
+            embed = discord.Embed(title = "체결 성공", description = None, color=0x00DDEE)
             embed.add_field(name = "체결가", value = price)
             embed.add_field(name = "현재 보유 수량", value = curamount + amount)
             embed.add_field(name = "평균 구매가", value = newavg)
@@ -188,7 +188,7 @@ class 주식(commands.Cog, description = "한국 증시와 연동된 투자 시�
             earning = price - (curavg * amount)
             addStock(id, callsign, amount * -1)
             addMoney(id,price)
-            embed = discord.Embed(title = "체결 성공", description = None, color=0xDDA0DD)
+            embed = discord.Embed(title = "체결 성공", description = None, color=0x00DDEE)
             embed.add_field(name = "체결가", value = price)
             embed.add_field(name = "현재 보유 수량", value = curamount - amount)
             embed.add_field(name = "평균 구매가", value = curavg)
