@@ -20,6 +20,9 @@ CACHE_SIZE = 3
 prompt_cache = []
 prompt_cache_chat = []
 
+@bot.event
+async def on_ready():
+    print("ARiSA 로그인 완료")
 
 @bot.event
 async def on_message(msg):
@@ -89,9 +92,7 @@ async def clear(ctx):
     ebd.add_field(name = "실행 완료", value = "프롬프트 캐시가 제거되었습니다.", inline = False)
     await ctx.send(embed = ebd)
 
-@bot.event()
-async def on_ready():
-    print("ARiSA 로그인 완료")
+
 
 current_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),"cogs")
 print("현재 경로", current_path)
