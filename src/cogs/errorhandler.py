@@ -4,7 +4,7 @@ import sys
 from discord.ext import commands
 
 async def raiseError(ctx , type, message):
-    errEmbed = discord.Embed(title = "에러", description = None, color = 0xDDA0DD)
+    errEmbed = discord.Embed(title = "에러", description = None, color = 0xFF0000)
     errEmbed.add_field(name = "종류", value = type,inline = False)
     errEmbed.add_field(name = "도움말", value = message, inline = False)
     await ctx.send(embed = errEmbed)
@@ -28,6 +28,8 @@ class 에러관리(commands.Cog, description = "에러 핸들링 커맨드"):
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
+
+        print("error detected!!!!!")
         """The event triggered when an error is raised while invoking a command.
         Parameters
         ------------
