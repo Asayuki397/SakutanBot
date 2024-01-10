@@ -45,6 +45,8 @@ class 에러관리(commands.Cog, description = "에러 핸들링 커맨드"):
 
         ignored = (commands.CommandNotFound, )
 
+        error = getattr(error, 'original', error)
+
         if isinstance(error, ignored):
             await raiseError(ctx, "명령어 존재하지 않음",f"존재하지 않는 명령어입니다. `{ctx.prefix}` `help`으로 모든 명령어를 볼 수 있습니다.")
             return
