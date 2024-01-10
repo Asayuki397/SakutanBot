@@ -41,6 +41,8 @@ class 에러관리(commands.Cog, description = "에러 핸들링 커맨드"):
 
         if hasattr(ctx.command, 'on_error'):
             return
+        
+        error = type(error)
 
         ignored = (commands.CommandNotFound, )
 
