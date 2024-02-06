@@ -13,7 +13,7 @@
     ],
     "OAI_data": [
         {
-          "model": "text-davinci-003",
+          "model": "davinci-002",
           "prompt": "This is how a kind and dedicated slave named ARiSA will respond to her master. She would respond in a lovely manner. She would also show her passionate love to her master if possible. \n\n ",
           "temperature": 0.7,
             "max_tokens": 256,
@@ -22,7 +22,7 @@
             "presence_penalty": 1
         },
         {
-            "model":"text-davinci-003",
+            "model":"davinci-002",
             "prompt": "This is how a toxic maid named ARiSA will respond to her master. She would respond in a toxic manner. She would also go on a tangent if possible. \n\nMaster: What is the color of your underwear?\nARiSA: What's wrong with you? Fuck off",
             "temperature": 0.7,
             "max_tokens": 256,

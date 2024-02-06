@@ -1,4 +1,4 @@
-import openai
+from openai import OpenAI
 import json
 import os
 
@@ -46,6 +46,7 @@ def initVar():
         voice = data["EL_data"][0]["voice"]
 
 initVar()
+client = OpenAI(api_key=OAI.key)
 
 def llm(message, cached = None, lang = "en"):
 
@@ -55,16 +56,13 @@ def llm(message, cached = None, lang = "en"):
         else:
             cache_prompt = "\nMaster: " + message + "\nARiSA:"
 
-        openai.api_key = OAI.key
-        response = openai.Completion.create(
-        model= OAI.model,
+        response = client.completions.create(model= OAI.model,
         prompt= OAI.prompt + cache_prompt,
         temperature = OAI.temperature,
         max_tokens = OAI.max_tokens,
         top_p = OAI.top_p,
         frequency_penalty = OAI.frequency_penalty,
-        presence_penalty = OAI.presence_penalty
-        )
+        presence_penalty = OAI.presence_penalty)
         json_object = json.loads(str(response))
 
     elif lang == "kr":
@@ -73,16 +71,13 @@ def llm(message, cached = None, lang = "en"):
         else:
             cache_prompt = "\n주인님: " + message + "\n아리사:"
 
-        openai.api_key = OAI.key
-        response = openai.Completion.create(
-        model= OAIKR.model,
+        response = client.completions.create(model= OAIKR.model,
         prompt= OAIKR.prompt + cache_prompt,
         temperature = OAIKR.temperature,
         max_tokens = OAIKR.max_tokens,
         top_p = OAIKR.top_p,
         frequency_penalty = OAIKR.frequency_penalty,
-        presence_penalty = OAIKR.presence_penalty
-        )
+        presence_penalty = OAIKR.presence_penalty)
         json_object = json.loads(str(response))
 
     
@@ -111,15 +106,12 @@ def llm_chat(message : str, cached = None) -> str:
         {"role" : "user", "content" : str(message)}
     )
 
-    openai.api_key = OAI.key
 
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",  # The name of the OpenAI chatbot model to use
-        messages=pre_prompt,   # The conversation history up to this point, as a list of dictionaries
-        max_tokens=512,        # The maximum number of tokens (words or subwords) in the generated response
-        stop=None,              # The stopping sequence for the generated response, if any (not used here)
-        temperature=0.7,        # The "creativity" of the generated response (higher temperature = more creative)
-    )
+    response = client.chat.completions.create(model="gpt-3.5-turbo",  # The name of the OpenAI chatbot model to use
+    messages=pre_prompt,   # The conversation history up to this point, as a list of dictionaries
+    max_tokens=512,        # The maximum number of tokens (words or subwords) in the generated response
+    stop=None,              # The stopping sequence for the generated response, if any (not used here)
+    temperature=0.7)
 
     for choice in response.choices:
         if "text" in choice:
