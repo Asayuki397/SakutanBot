@@ -236,12 +236,11 @@ class 도박(commands.Cog, description = "과도한 도박은 정신건강에 �
     async def 주사위(self, ctx,betting : int):
         await ctx.defer()
         if betting <= 0:
-            await ctx.send("베팅금액은 자연수로 부탁할게")
-            return
+            raise ValueError
         id = int(ctx.author.id)
         try :
             if betting > getMoney(id):
-                await ctx.send("소지금액보다 더 큰 금액으로 베팅할 수 없어")
+                raise ValueError
             else:
                 result, amount = dice(betting)
                 addMoney(id, betting*-1)
@@ -396,14 +395,8 @@ class 도박(commands.Cog, description = "과도한 도박은 정신건강에 �
     @app_commands.describe(betting = "베팅할 금액을 입력하세요")
     async def 코인(self,ctx,predict : str,betting : int):
         id = ctx.author.id
-        if betting <= 0:
+        if betting <= 0 or predict not in ["앞면","뒷면"] or betting > getMoney(id):
             raise ValueError
-            return
-        if predict not in ["앞면","뒷면"]:
-            raise ValueError
-        if betting > getMoney(id):
-            await ctx.send("소지금액을 초과하는 베팅을 할 수 없어")
-            return
         addMoney(id,betting*-1)
         res = coin()
         resEmbed = discord.Embed(title = "게임 결과", description = None, color = 0x00DDEE)
