@@ -13,7 +13,7 @@ print("명령어 접두사 : ", prefix)
 intents=discord.Intents.all()
 
 bot = commands.Bot(command_prefix=prefix, intents=intents, application_id = application_id,
-                   activity = discord.Game("ARiSA 채팅방"))
+                   activity = discord.Game("방송"))
 bot.owner_id = os.environ['BOT_OWNER_ID']
 
 CACHE_SIZE = 3
@@ -22,7 +22,7 @@ prompt_cache_chat = []
 
 @bot.event
 async def on_ready():
-    print("ARiSA 로그인 완료")
+    print("SakutanBot 로그인 완료")
 
 @bot.event
 async def on_message(msg):
