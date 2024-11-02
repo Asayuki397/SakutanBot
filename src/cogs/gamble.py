@@ -174,7 +174,7 @@ class rps:
 
         resEmbed = discord.Embed(title = "게임 결과", description = None, color = 0x00DDEE)
         resEmbed.add_field(name = "나", value = player + self.rpsIcon[self.rpsList.index(player)])
-        resEmbed.add_field(name = "아리사", value = dealer + self.rpsIcon[self.rpsList.index(dealer)])
+        resEmbed.add_field(name = "사쿠땅", value = dealer + self.rpsIcon[self.rpsList.index(dealer)])
 
         if res == "draw":
             resEmbed.add_field(name = "결과", value = "무승부")
