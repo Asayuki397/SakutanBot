@@ -20,7 +20,7 @@ class 백준(commands.Cog, description = ""):
         embed = create_embed("백준", data)
         await ctx.send(embed=embed)
 
-        response = await llm_chat(self.bot, f"다음 코드를 그대로 적은 다음 코멘트를 달아줘. 수정할 부분이 있다면 수정된 코드를 추가로 작성해도 좋아 \n{code}")
+        response = await llm_chat(self.bot, f"나는 이 알고리즘 문제에 대해 이야기하고 있어. 이 문제는 현재 {status} 상태야. 수정 전 코드를 반드시 먼저 적은 다음 코멘트를 달아줘. 수정할 부분이 있다면 수정 후 코드를 수정 전 코드 아래에 추가로 작성해도 좋아 \n{code}")
         await ctx.send(response)
 
 async def setup(bot):
