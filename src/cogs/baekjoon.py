@@ -15,8 +15,8 @@ class 백준(commands.Cog, description = ""):
         if status == "질문": status = "❓질문"
         elif status == "해결": status = "✅해결"
         elif status == "실패" : status = "❌실패"
-        data = dict(status=status, number=number, code="`"+code+"`")
-        embed = create_embed(ctx, data)
+        data = dict(상태 = status, 문제번호 = number, 코드 ="`"+code+"`")
+        embed = create_embed("백준",data)
         await ctx.send(embed=embed)
 
 async def setup(bot):

@@ -8,7 +8,7 @@ def create_embed(title, data, color = color):
     e = Embed(title = title, description= None, color = color)
     if type(data) == dict:
         for key in data.keys():
-            e.add_field(name = key, value = dict['key'], inline=False)
+            e.add_field(name = key, value = data['key'], inline=False)
 
     elif type(data) == None:
         pass
