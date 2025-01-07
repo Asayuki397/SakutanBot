@@ -1,6 +1,7 @@
 from discord.ext import commands
 from embed import create_embed
 from discord import app_commands
+from proto import llm_chat
 
 class 백준(commands.Cog, description = ""):
 
@@ -15,9 +16,12 @@ class 백준(commands.Cog, description = ""):
         if status == "질문": status = "❓질문"
         elif status == "해결": status = "✅해결"
         elif status == "실패" : status = "❌실패"
-        data = dict(상태 = status, 문제번호 = number, 코드 ="`"+code+"`")
-        embed = create_embed("백준",data)
+        data = dict(상태 = status, 문제번호 = number)
+        embed = create_embed("백준", data)
         await ctx.send(embed=embed)
+
+        response = await llm_chat(self.bot, f"다음 코드를 그대로 적은 다음 코멘트를 달아줘. 수정할 부분이 있다면 수정된 코드를 추가로 작성해도 좋아 \n{code}")
+        await ctx.send(response)
 
 async def setup(bot):
     await bot.add_cog(백준(bot))
