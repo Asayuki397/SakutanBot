@@ -31,8 +31,7 @@ async def on_message(msg):
 
     execution = True
 
-    if msg.content.startswith(prefix):
-        return
+    await bot.process_commands(msg)
 
     if bot.user.mentioned_in(msg):
 
