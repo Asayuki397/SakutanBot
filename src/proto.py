@@ -38,7 +38,7 @@ def initVar():
 initVar()
 client = openai.AsyncOpenAI()
 
-def llm_chat(bot, message : str, cached = None,) -> str:
+async def llm_chat(bot, message : str, cached = None,) -> str:
     """returns the reply from the model
     
     parameters
@@ -60,7 +60,7 @@ def llm_chat(bot, message : str, cached = None,) -> str:
     )
 
     openai.api_key = OAI.key
-    response = client.chat.completions.create(model="gpt-4o-mini",  # The name of the OpenAI chatbot model to use
+    response = await client.chat.completions.create(model="gpt-4o-mini",  # The name of the OpenAI chatbot model to use
     messages=pre_prompt,   # The conversation history up to this point, as a list of dictionaries
     max_tokens=512,        # The maximum number of tokens (words or subwords) in the generated response
     stop=None,              # The stopping sequence for the generated response, if any (not used here)
