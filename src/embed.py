@@ -19,3 +19,5 @@ def create_embed(title, data, color = color):
 
     else:
         e.add_field(name = data, value = None, inline = False)
+
+    return e
