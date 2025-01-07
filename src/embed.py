@@ -7,7 +7,7 @@ with open("profile.json", "r") as f:
 def create_embed(title, data, color = color):
     e = Embed(title = title, description= None, color = color)
     if type(data) == dict:
-        for key in dict.keys():
+        for key in data.keys():
             e.add_field(name = key, value = dict['key'], inline=False)
 
     elif type(data) == None:
