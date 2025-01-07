@@ -15,6 +15,6 @@ class 백준(commands.Cog, description = ""):
         if status == "질문": status = "❓질문"
         elif status == "해결": status = "✅해결"
         elif status == "실패" : status = "❌실패"
-        data = dict(status=status, number=number, code=code)
+        data = dict(status=status, number=number, code="`"+code+"`")
         embed = create_embed(ctx, data)
         await ctx.send(embed=embed)
