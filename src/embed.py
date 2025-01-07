@@ -2,7 +2,7 @@ from discord import Embed
 import json
 
 with open("profile.json", "r") as f:
-    color = int(json.load(f)['color'])
+    color = int(json.load(f)['color'], 16)
 
 def create_embed(title, data, color = color):
     e = Embed(title = title, description= None, color = color)
