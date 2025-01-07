@@ -31,10 +31,7 @@ async def on_message(msg):
 
     execution = True
 
-    if msg.author.bot:
-        return
-
-    if msg.content.startswith(".."):
+    if msg.content.startswith(prefix):
         return
 
     if bot.user.mentioned_in(msg):
