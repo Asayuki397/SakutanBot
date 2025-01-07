@@ -18,3 +18,6 @@ class 백준(commands.Cog, description = ""):
         data = dict(status=status, number=number, code="`"+code+"`")
         embed = create_embed(ctx, data)
         await ctx.send(embed=embed)
+
+async def setup(bot):
+    await bot.add_cog(백준(bot))
