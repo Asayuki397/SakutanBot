@@ -4,7 +4,7 @@ from discord.ext import commands
 import os
 import asyncio
 import json
-from proto import llm, llm_chat
+from proto import llm_chat
 
 BOT_TOKEN = os.environ['BOT_TOKEN']
 application_id = os.environ['APPLICATION_ID']
