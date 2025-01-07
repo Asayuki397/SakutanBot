@@ -35,7 +35,7 @@ async def on_message(msg):
     if msg.content.startswith(".."):
         return
 
-    if f"<@!{bot.user.id}>" in msg.content:
+    if bot.user.mentioned_in(msg):
 
         user_name = msg.author.name
         user_id = msg.author.id
