@@ -22,7 +22,7 @@ def initVar():
         exit()
 
     class OAI:
-        key = data["keys"][0]["OAI_key"]
+        key = os.environ.get('OPENAI_API_KEY')
         model = data["OAI_data"][0]["model"]
         prompt = data["OAI_data"][0]["prompt"]
         temperature = data["OAI_data"][0]["temperature"]
@@ -31,59 +31,12 @@ def initVar():
         frequency_penalty = data["OAI_data"][0]["frequency_penalty"]
         presence_penalty = data["OAI_data"][0]["presence_penalty"]
 
-    class OAIKR:
-        key = data["keys"][0]["OAI_key"]
-        model = data["OAI_data"][1]["model"]
-        prompt = data["OAI_data"][1]["prompt"]
-        temperature = data["OAI_data"][1]["temperature"]
-        max_tokens = data["OAI_data"][1]["max_tokens"]
-        top_p = data["OAI_data"][1]["top_p"]
-        frequency_penalty = data["OAI_data"][1]["frequency_penalty"]
-        presence_penalty = data["OAI_data"][1]["presence_penalty"]
-
     class EL:
         key = data["keys"][0]["EL_key"]
         voice = data["EL_data"][0]["voice"]
 
 initVar()
 client = openai.AsyncOpenAI()
-
-def llm(message, cached = None, lang = "en"):
-
-    if lang == "en":
-        if cached is not None:
-            cache_prompt = "".join(cached) + "\nMaster: " + message + "\nARiSA:"
-        else:
-            cache_prompt = "\nMaster: " + message + "\nARiSA:"
-
-        response = client.completions.create(model= OAI.model,
-        prompt= OAI.prompt + cache_prompt,
-        temperature = OAI.temperature,
-        max_tokens = OAI.max_tokens,
-        top_p = OAI.top_p,
-        frequency_penalty = OAI.frequency_penalty,
-        presence_penalty = OAI.presence_penalty)
-        json_object = json.loads(str(response))
-
-    elif lang == "kr":
-        if cached is not None:
-            cache_prompt = "".join(cached) + "\n주인님: " + message + "\n아리사:"
-        else:
-            cache_prompt = "\n주인님: " + message + "\n아리사:"
-
-        response = client.completions.create(model= OAIKR.model,
-        prompt= OAIKR.prompt + cache_prompt,
-        temperature = OAIKR.temperature,
-        max_tokens = OAIKR.max_tokens,
-        top_p = OAIKR.top_p,
-        frequency_penalty = OAIKR.frequency_penalty,
-        presence_penalty = OAIKR.presence_penalty)
-        json_object = json.loads(str(response))
-
-    
-
-    
-    return(json_object['choices'][0]['text'])
 
 def llm_chat(bot, message : str, cached = None,) -> str:
     """returns the reply from the model
@@ -135,4 +88,4 @@ def arisa_reaction(activity : str):
 
 if __name__ == "__main__": #직접 실행시 적용 (테스트용)
     master_input = input("prompt : ")
-    print(llm(master_input))
+    print(llm_chat(master_input))
