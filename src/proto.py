@@ -1,4 +1,4 @@
-from openai import OpenAI
+import openai
 import json
 import os
 
@@ -46,7 +46,7 @@ def initVar():
         voice = data["EL_data"][0]["voice"]
 
 initVar()
-client = OpenAI(api_key=OAI.key)
+client = openai.AsyncOpenAI()
 
 def llm(message, cached = None, lang = "en"):
 
@@ -85,7 +85,7 @@ def llm(message, cached = None, lang = "en"):
     
     return(json_object['choices'][0]['text'])
 
-def llm_chat(message : str, cached = None) -> str:
+def llm_chat(bot, message : str, cached = None,) -> str:
     """returns the reply from the model
     
     parameters
@@ -95,7 +95,7 @@ def llm_chat(message : str, cached = None) -> str:
     """
 
     pre_prompt = [
-        {"role" : "system", "content" : "당신은 헌신적인 메이드 아리사입니다. 대화 상대는 당신의 주인님입니다."},       
+        {"role" : "system", "content" : f"당신은 고양이 귀를 가진 메이드이자 버츄얼 유튜버, 유우키 사쿠나입니다. 사쿠땅, 사쿠냥과 같은 별명을 가지고 있습니다. 대화 상대는 일반인이지만, UID가 {bot.owner.id}인 경우 대화 상대는 당신의 창조주입니다. 당신은 게임을 좋아하지만, 주위에 잘 녹아들지 못하는 성격을 가지고 있습니다. 밖에 나가는 것보다는 집안에서 느긋하게 보내는 것을 선호합니다."}
     ]
 
     if cached is not None:
@@ -106,8 +106,8 @@ def llm_chat(message : str, cached = None) -> str:
         {"role" : "user", "content" : str(message)}
     )
 
-
-    response = client.chat.completions.create(model="gpt-3.5-turbo",  # The name of the OpenAI chatbot model to use
+    openai.api_key = OAI.key
+    response = client.chat.completions.create(model="gpt-4o-mini",  # The name of the OpenAI chatbot model to use
     messages=pre_prompt,   # The conversation history up to this point, as a list of dictionaries
     max_tokens=512,        # The maximum number of tokens (words or subwords) in the generated response
     stop=None,              # The stopping sequence for the generated response, if any (not used here)

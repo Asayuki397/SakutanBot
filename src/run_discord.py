@@ -35,18 +35,19 @@ async def on_message(msg):
     if msg.content.startswith(".."):
         return
 
-    if msg.channel.id == 1097414601588617216 and execution:
+    if f"<@!{bot.user.id}>" in msg.content:
 
         user_name = msg.author.name
+        user_id = msg.author.id
 
         global prompt_cache_chat
 
         if len(prompt_cache_chat) == 0:
             prompt_cache_chat.append(
-                    {"role" : "system", "content" : f"당신의 대화 상대 이름 : {user_name}"},
+                    {"role" : "system", "content" : f"당신의 대화 상대 이름 : {user_name}, UID : {user_id}"},
                     )
-        elif not prompt_cache_chat[0]["content"].endswith(user_name):
-            prompt_cache_chat[0] = {"role" : "system", "content" : f"당신의 대화 상대 이름 : {user_name}"}
+        elif not prompt_cache_chat[0]["content"].endswith(user_id):
+            prompt_cache_chat[0] = {"role" : "system", "content" : f"당신의 대화 상대 이름 : {user_name}, UID : {user_id}"}
 
         res = llm_chat(msg.content, cached = prompt_cache_chat)
 
@@ -64,23 +65,6 @@ async def on_message(msg):
             prompt_cache_chat.pop(0)
 
         return
-
-    if msg.channel.id == 1096237172429947012 and execution:
-
-        global prompt_cache
-
-        res = llm(msg.content, cached = prompt_cache)
-
-        new_cache = "\nMaster: " + msg.content + "\nARiSA: " + res
-        prompt_cache.append(new_cache)
-
-        if len(prompt_cache) > CACHE_SIZE:
-            prompt_cache.pop(0)
-
-        await msg.reply(res)
-        return
-    
-    await bot.process_commands(msg)
 
 @bot.command()
 async def clear(ctx):
