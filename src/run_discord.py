@@ -49,7 +49,7 @@ async def on_message(msg):
         elif not prompt_cache_chat[0]["content"].endswith(user_id):
             prompt_cache_chat[0] = {"role" : "system", "content" : f"당신의 대화 상대 이름 : {user_name}, UID : {user_id}"}
 
-        res = llm_chat(msg.content, cached = prompt_cache_chat)
+        res = llm_chat(bot, msg.content, cached = prompt_cache_chat)
 
         await msg.reply(res)
 
