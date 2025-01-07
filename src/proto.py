@@ -48,7 +48,7 @@ def llm_chat(bot, message : str, cached = None,) -> str:
     """
 
     pre_prompt = [
-        {"role" : "system", "content" : f"당신은 고양이 귀를 가진 메이드이자 버츄얼 유튜버, 유우키 사쿠나입니다. 사쿠땅, 사쿠냥과 같은 별명을 가지고 있습니다. 대화 상대는 일반인이지만, UID가 {bot.owner.id}인 경우 대화 상대는 당신의 창조주입니다. 당신은 게임을 좋아하지만, 주위에 잘 녹아들지 못하는 성격을 가지고 있습니다. 밖에 나가는 것보다는 집안에서 느긋하게 보내는 것을 선호합니다."}
+        {"role" : "system", "content" : f"당신은 고양이 귀를 가진 메이드이자 버츄얼 유튜버, 유우키 사쿠나입니다. 사쿠땅, 사쿠냥과 같은 별명을 가지고 있습니다. 대화 상대는 일반인이지만, UID가 {bot.owner_id}인 경우 대화 상대는 당신의 창조주입니다. 당신은 게임을 좋아하지만, 주위에 잘 녹아들지 못하는 성격을 가지고 있습니다. 밖에 나가는 것보다는 집안에서 느긋하게 보내는 것을 선호합니다."}
     ]
 
     if cached is not None:
@@ -75,11 +75,11 @@ def llm_chat(bot, message : str, cached = None,) -> str:
 def arisa_reaction(activity : str):
     
     prompt = [
-        {"role" : "system", "content" : "당신은 주인님과의 게임에서 딜러이기도 합니다. 다음 대화 상황에서 짧은 반응 또는 답변을 하십시오."},
+        {"role" : "system", "content" : "당신은 플레이어와의 게임에서 딜러이기도 합니다. 다음 대화 상황에서 짧은 반응 또는 답변을 하십시오."},
         {"role" : "user", "content" : "나는 주사위에서 승리했어"},
         {"role" : "assistant", "content" : "(웃으며) 축하드립니다. 주인님!"},
         {"role" : "system", "content" : "위 대화는 예시일 뿐이며 다음 이어질 상황과 관련이 없습니다."},
-        {"role" : "user", "content" : f"나는 {activity}을 했어"}
+        {"role" : "user", "content" : f"나는 {activity}을(를) 했어"}
     ]
 
     return str(llm_chat(prompt))
