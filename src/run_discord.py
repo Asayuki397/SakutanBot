@@ -22,6 +22,8 @@ prompt_cache_chat = []
 
 @bot.event
 async def on_ready():
+    synced = await bot.tree.sync()
+    print(f"Synced {len(synced)} commands.")
     print("SakutanBot 로그인 완료")
 
 @bot.event
