@@ -16,7 +16,7 @@ bot = commands.Bot(command_prefix=prefix, intents=intents, application_id = appl
                    activity = discord.Game("방송"))
 bot.owner_id = os.environ['BOT_OWNER_ID']
 
-CACHE_SIZE = 3
+CACHE_SIZE = 5
 prompt_cache = []
 prompt_cache_chat = []
 
