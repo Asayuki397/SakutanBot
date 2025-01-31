@@ -23,17 +23,10 @@ def initVar():
 
     class OAI:
         key = os.environ.get('OPENAI_API_KEY')
-        model = data["OAI_data"][0]["model"]
-        prompt = data["OAI_data"][0]["prompt"]
-        temperature = data["OAI_data"][0]["temperature"]
-        max_tokens = data["OAI_data"][0]["max_tokens"]
-        top_p = data["OAI_data"][0]["top_p"]
-        frequency_penalty = data["OAI_data"][0]["frequency_penalty"]
-        presence_penalty = data["OAI_data"][0]["presence_penalty"]
 
     class EL:
         key = data["keys"][0]["EL_key"]
-        voice = data["EL_data"][0]["voice"]
+        voice = data["keys"][0]["EL_voice"]
 
 initVar()
 client = openai.AsyncOpenAI()

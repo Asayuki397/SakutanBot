@@ -201,10 +201,10 @@ class 주식(commands.Cog, description = "한국 증시와 연동된 투자 시�
                 embed.add_field(name = "획득 경험치", value = earning // 0)
             await ctx.send(embed= embed)
 
-    @commands.hybrid_command(name="옵션", description="옵션 거래를 할 수 있습니다.")
+    @commands.hybrid_command(name="선물", description="선물 거래를 할 수 있습니다.")
     @app_commands.describe(callsign="주식의 콜사인을 입력하세요. `주식`으로 콜사인을 확인할 수 있습니다.")
     @app_commands.describe(leverage="주식의 레버리지를 입력하세요. 높은 숫자를 입력할수록 투자위험도와 수익이 증가합니다.")
-    async def 옵션(self, ctx, callsign: str, leverage: int):
+    async def 선물(self, ctx, callsign: str, leverage: int):
         await ctx.defer()
         id = ctx.author.id
         stock = callsign
