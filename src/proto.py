@@ -26,7 +26,6 @@ def initVar():
 
     class EL:
         key = data["keys"][0]["EL_key"]
-        voice = data["keys"][0]["EL_voice"]
 
 initVar()
 client = openai.AsyncOpenAI()
