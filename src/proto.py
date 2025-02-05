@@ -28,7 +28,7 @@ async def llm_chat(bot, message : str, cached = None,) -> str:
     )
 
 
-    response = await client.chat.completions.create(model="o3-mini",
+    response = await client.chat.completions.create(model="o1-mini",
     messages=pre_prompt,)
 
     for choice in response.choices:
