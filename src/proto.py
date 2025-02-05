@@ -52,7 +52,7 @@ async def llm_chat(bot, message : str, cached = None,) -> str:
     )
 
     openai.api_key = OAI.key
-    response = await client.chat.completions.create(model="gpt-o3-mini",  # The name of the OpenAI chatbot model to use
+    response = await client.chat.completions.create(model="o3-mini",  # The name of the OpenAI chatbot model to use
     messages=pre_prompt,   # The conversation history up to this point, as a list of dictionaries
     max_tokens=2048,        # The maximum number of tokens (words or subwords) in the generated response
     stop=None,              # The stopping sequence for the generated response, if any (not used here)

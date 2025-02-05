@@ -13,7 +13,7 @@ print("명령어 접두사 : ", prefix)
 intents=discord.Intents.all()
 
 bot = commands.Bot(command_prefix=prefix, intents=intents, application_id = application_id,
-                   activity = discord.Game("gpt-o3-mini 장착"))
+                   activity = discord.Game("o3-mini 장착"))
 bot.owner_id = os.environ['BOT_OWNER_ID']
 
 CACHE_SIZE = 5
