@@ -3,7 +3,7 @@ from discord.ext import commands
 from discord.ui import Button, View
 from discord import app_commands
 from users import *
-from proto import arisa_reaction
+from proto import sakutan_reaction
 import psycopg2
 import random
 from .errorhandler import UserNotFoundError
@@ -306,7 +306,7 @@ class 도박(commands.Cog, description = "과도한 도박은 정신건강에 �
                     addMoney(ctx.author.id, amount)
                     modifyExp(ctx.author.id, amount //100)
                     await ctx.send(embed=resembed)
-                    await ctx.send(arisa_reaction(activity))
+                    await ctx.send(sakutan_reaction(activity))
                     return
 
                 hitbutton = Button(label="HIT", style=discord.ButtonStyle.danger,custom_id="hit")
@@ -331,7 +331,7 @@ class 도박(commands.Cog, description = "과도한 도박은 정신건강에 �
                         await msg.delete()
                         await buttons.delete()
                         activity = "블랙잭에서 플레이어 버스트로 패배"
-                        await ctx.send(arisa_reaction(activity))
+                        await ctx.send(sakutan_reaction(activity))
                         return
                 async def stand_callback(interaction, player = player,dealer = dealer):
                     result = bj.showdown(player,dealer)
@@ -380,7 +380,7 @@ class 도박(commands.Cog, description = "과도한 도박은 정신건강에 �
                     dealer = None
                     await buttons.delete()
                     await ctx.send(embed=resembed)
-                    await ctx.send(arisa_reaction(activity))
+                    await ctx.send(sakutan_reaction(activity))
                 hitbutton.callback = hit_callback
                 standbutton.callback = stand_callback
                 view = View()

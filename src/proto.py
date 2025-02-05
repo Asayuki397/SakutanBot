@@ -1,38 +1,14 @@
 import openai
 import json
 import os
+import asyncio
 
-def initVar():
-
-    global EL_key
-    global OAI_key
-    global EL_voice
-    global video_id
-    global tts_type
-    global OAI
-    global EL
-    global OAIKR
-
-    try:
-        abs_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),"config.json")
-        with open(abs_path, "r") as json_file:
-            data = json.load(json_file)
-    except:
-        print("Unable to open JSON file.")
-        exit()
-
-    class OAI:
-        key = os.environ.get('OPENAI_API_KEY')
-
-    class EL:
-        key = data["keys"][0]["EL_key"]
-
-initVar()
-client = openai.AsyncOpenAI()
+key = os.environ.get('OPENAI_API_KEY')
+client = openai.AsyncOpenAI(api_key = key)
 
 async def llm_chat(bot, message : str, cached = None,) -> str:
     """returns the reply from the model
-    
+
     parameters
 
     message : str
@@ -46,17 +22,14 @@ async def llm_chat(bot, message : str, cached = None,) -> str:
     if cached is not None:
         for cache in cached:
             pre_prompt.append(cache)
-    
+
     pre_prompt.append(
         {"role" : "user", "content" : str(message)}
     )
 
-    openai.api_key = OAI.key
-    response = await client.chat.completions.create(model="o3-mini",  # The name of the OpenAI chatbot model to use
-    messages=pre_prompt,   # The conversation history up to this point, as a list of dictionaries
-    max_tokens=2048,        # The maximum number of tokens (words or subwords) in the generated response
-    stop=None,              # The stopping sequence for the generated response, if any (not used here)
-    temperature=0.7)
+
+    response = await client.chat.completions.create(model="o3-mini",
+    messages=pre_prompt,)
 
     for choice in response.choices:
         if "text" in choice:
@@ -64,10 +37,10 @@ async def llm_chat(bot, message : str, cached = None,) -> str:
 
     return response.choices[0].message.content
 
-def arisa_reaction(activity : str):
-    
+def sakutan_reaction(activity : str):
+
     prompt = [
-        {"role" : "system", "content" : "당신은 플레이어와의 게임에서 딜러이기도 합니다. 다음 대화 상황에서 짧은 반응 또는 답변을 하십시오."},
+        {"role" : "system", "content" : "당신은 고양이 귀를 가진 메이드이자 버츄얼 유튜버, 유우키 사쿠나입니다. 사쿠땅, 사쿠냥과 같은 별명을 가지고 있습니다. 당신은 플레이어와의 게임에서 딜러이기도 합니다. 다음 대화 상황에서 짧은 반응 또는 답변을 하십시오."},
         {"role" : "user", "content" : "나는 주사위에서 승리했어"},
         {"role" : "assistant", "content" : "(웃으며) 축하드립니다. 주인님!"},
         {"role" : "system", "content" : "위 대화는 예시일 뿐이며 다음 이어질 상황과 관련이 없습니다."},
@@ -75,9 +48,17 @@ def arisa_reaction(activity : str):
     ]
 
     return str(llm_chat(prompt))
+async def test_chat(prompt):
+    response = await client.chat.completions.create(model="o1-mini",
+    messages=prompt,)
 
-    
+    for choice in response.choices:
+        if "text" in choice:
+            return choice.text
+
+    print(response.choices[0].message.content)
+    return 0
 
 if __name__ == "__main__": #직접 실행시 적용 (테스트용)
     master_input = input("prompt : ")
-    print(llm_chat(master_input))
+    asyncio.run(test_chat([{"role" : "user", "content" : str(master_input)},]))
