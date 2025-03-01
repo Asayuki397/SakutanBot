@@ -25,7 +25,7 @@ class 백준(commands.Cog, description = ""):
             responses = response.split("\n")
             for response in responses:
                 if not response:
-                    continue()
+                    continue
                 await ctx.send(response)
         else: await ctx.send(response)
 
