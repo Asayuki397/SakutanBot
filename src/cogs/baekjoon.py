@@ -24,6 +24,8 @@ class 백준(commands.Cog, description = ""):
         if len(response) >= 1900: 
             responses = response.split("\n")
             for response in responses:
+                if not response:
+                    continue()
                 await ctx.send(response)
         else: await ctx.send(response)
 
